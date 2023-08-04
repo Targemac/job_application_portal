@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import "../node_modules/react-toastify/dist/ReactToastify.min.css";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import ContactInfo from "./Components/ContactInfo";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -25,10 +25,12 @@ function App() {
       setStepCount(2);
       setContactInfo(false);
       setBackgroundCheck(true);
+      toast.info("Progress Saved");
     } else if (stepCount === 2) {
       setStepCount(3);
       setBackgroundCheck(false);
       setSubmitApplication(true);
+      toast.info("Progress Saved");
     }
   };
   const handleBackClick = () => {
@@ -45,9 +47,11 @@ function App() {
   };
 
   const handleSubmit = () => {
-    if (stepCount === 3) {
+    let res = window.confirm("You are about to submit application");
+
+    if (stepCount === 3 && res === true) {
       setStepCount(4);
-      setShowStepCount(false)
+      setShowStepCount(false);
       setSubmitApplication(false);
       setThankYou(true);
     }
